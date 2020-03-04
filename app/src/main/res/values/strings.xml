@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Smartsplit</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="with_you_and">With you and:</string>
+    <string name="enter_a_contact">Enter a contact</string>
+    <string name="enter_a_description">Enter a Description</string>
+    <string name="_0_00">0.00</string>
+    <string name="save">SAVE</string>
+    <string name="logout">Logout</string>
+    <string name="take_me_home">Take me Home</string>
+    <string name="welcome_you_are_logged_in">Welcome! You are logged in</string>
+    <string-array name="programming_languages">
+        <item>C</item>
+        <item>C++</item>
+        <item>Java</item>
+        <item>Javascript</item>
+        <item>Kotlin</item>
+        <item>Python</item>
+        <item>Visual Studio</item>
+        <item>Ruby</item>
+    </string-array>
+    <string-array name="description">
+
+        <item>This is a random description.</item>
+        <item>This is a random description.</item>
+        <item>This is a random description.</item>
+        <item>This is a random description.</item>
+        <item>This is a random description.</item>
+        <item>This is a random description.</item>
+        <item>This is a random description.</item>
+        <item>This is a random description.</item>
+    </string-array>
+</resources>

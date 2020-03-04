@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "889373799194",
+    "firebase_url": "https://smartsplit-8d499.firebaseio.com",
+    "project_id": "smartsplit-8d499",
+    "storage_bucket": "smartsplit-8d499.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889373799194:android:cea9053050b83bf0abb2a3",
+        "android_client_info": {
+          "package_name": "com.example.smartsplit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889373799194-lok812qn5riecuoav9ekij9hm6joq86a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartsplit",
+            "certificate_hash": "c6e2d6d7e253c7492121058a98db05629a72c360"
+          }
+        },
+        {
+          "client_id": "889373799194-l63tf8fpvfcq9229g9rvf8gk6kn32858.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfhKNKBkH53DAL5ibfJD-h3eFEFookO2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889373799194-l63tf8fpvfcq9229g9rvf8gk6kn32858.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
