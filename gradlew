@@ -36,7 +36,7 @@ MAX_FD="maximum"
 warn () {
     echo "$*"
 }
-Edited by deekshant
+Edited by deekshant + preetam
 die () {
     echo
     echo "$*"
