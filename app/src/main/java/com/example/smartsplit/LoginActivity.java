@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long email = Integer.parseInt(emailId.getText().toString());
+                //String email = emailId.getText().toString();
                 String pwd = password.getText().toString();
 
                 if(emailId.getText().toString().isEmpty()){
@@ -70,10 +70,11 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"Fields Are Empty!",Toast.LENGTH_SHORT).show();
                 }
                 else  if(!(emailId.getText().toString().isEmpty()&& pwd.isEmpty())){
-                    mFirebaseAuth.signInWithEmailAndPassword(emailId.getText().toString()+"@abc.com", pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    mFirebaseAuth.signInWithEmailAndPassword(emailId.getText().toString(), pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
+                                Log.i("LOGIN EXCEPTION",task.getException().getMessage());
                                 Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
                             }
                             else{

@@ -2,6 +2,7 @@ package com.example.smartsplit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +36,7 @@ public class MainActivityo extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long email = Integer.parseInt(emailId.getText().toString());
+                //long email = Integer.parseInt(emailId.getText().toString());
                 String pwd = password.getText().toString();
                 if(emailId.getText().toString().isEmpty()){
                     emailId.setError("Please enter email id");
@@ -49,10 +50,11 @@ public class MainActivityo extends AppCompatActivity {
                     Toast.makeText(MainActivityo.this,"Fields Are Empty!",Toast.LENGTH_SHORT).show();
                 }
                 else  if(!(emailId.getText().toString().isEmpty() && pwd.isEmpty())){
-                    mFirebaseAuth.createUserWithEmailAndPassword(emailId.getText().toString()+"@abc.com", pwd).addOnCompleteListener(MainActivityo.this, new OnCompleteListener<AuthResult>() {
+                    mFirebaseAuth.createUserWithEmailAndPassword(emailId.getText().toString(), pwd).addOnCompleteListener(MainActivityo.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
+                                Log.i("LOGIN EXCEPTION",task.getException().getMessage());
                                 Toast.makeText(MainActivityo.this,"SignUp Unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
                             }
                             else {
@@ -76,4 +78,5 @@ public class MainActivityo extends AppCompatActivity {
             }
         });
     }
+
 }
