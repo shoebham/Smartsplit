@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -53,10 +54,9 @@
 
 
     <!-- Hidden Contact Details-->
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/hidden1"
         android:layout_width="wrap_content"
@@ -64,48 +64,59 @@
         android:visibility="gone"
         />
 
-        <ImageView
-            android:id="@+id/hidden1_image"
-            android:layout_toRightOf="@+id/hidden1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/hidden1_image"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_toEndOf="@+id/hidden1"
+        android:layout_toRightOf="@+id/hidden1"
+        android:src="@android:drawable/btn_dialog"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/hidden2"
+        android:layout_below="@id/hidden1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
-        <ImageView
-            android:id="@+id/hidden2_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/hidden2_image"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_below="@id/hidden1"
+        android:layout_toRightOf="@+id/hidden2"
+        android:src="@android:drawable/btn_dialog"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/hidden3"
+        android:layout_below="@+id/hidden2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
-        <ImageView
-            android:id="@+id/hidden3_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/hidden3_image"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_below="@id/hidden2"
+        android:layout_toRightOf="@+id/hidden3"
+        android:src="@android:drawable/btn_dialog"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/hidden4"
+        android:layout_below="@id/hidden3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
-        <ImageView
-            android:id="@+id/hidden4_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:visibility="gone" />
-    </RelativeLayout>
+    <ImageView
+        android:id="@+id/hidden4_image"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_below="@id/hidden3"
+        android:layout_toRightOf="@+id/hidden4"
+        android:src="@android:drawable/btn_dialog"
+        android:visibility="gone" />
+</RelativeLayout>
     <!-- Hidden Contact Details-->
     <EditText
         android:id="@+id/editText"
@@ -155,7 +166,7 @@
 
     </RadioGroup>
 <!--HIDDEN-->
-  <TextView
+  <!--<TextView
       android:id="@+id/your_share_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -167,27 +178,99 @@
         android:visibility="gone"
         android:inputType="number"
         android:layout_height="wrap_content"
-        />
+        />-->
+<!-- Unequal hidden fields-->
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/friend_share_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:textSize="24sp"
+            android:layout_above="@id/friend_share_text"
+            android:text="Enter share of:"/>
+        <!-- Friend 1-->
     <TextView
-        android:id="@+id/friend_share_text"
+        android:id="@+id/friend1_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Enter friends share:"/>
-    <EditText
-        android:id="@+id/et_friend_share"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:inputType="number"
+        android:layout_below="@id/friend_share_text"
+        android:textSize="24sp"
+        android:text="friend1"/>
 
-        android:layout_height="wrap_content"
-        />
-    <!--HIDDEN-->
-    <Button
+        <EditText
+            android:id="@+id/et_friend1_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/friend2_share"
+            android:layout_toEndOf="@+id/friend1_share"
+            android:inputType="number"
+            android:visibility="visible" />
+
+        <!-- Friend 2-->
+    <TextView
+        android:id="@+id/friend2_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Split"
-        android:onClick="send"
-        />
+        android:layout_below="@+id/friend1_share"
+        android:textSize="24sp"
+        android:text="friend2"/>
+        <EditText
+            android:id="@+id/et_friend2_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/friend2_share"
+            android:layout_above="@+id/friend3_share"
+            android:inputType="number"
 
+            android:visibility="visible"/>
+
+        <!-- Friend 3-->
+    <TextView
+         android:id="@+id/friend3_share"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/friend2_share"
+         android:textSize="24sp"
+         android:text="friend3"/>
+        <EditText
+            android:id="@+id/et_friend3_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/friend3_share"
+            android:layout_above="@+id/friend4_share"
+            android:inputType="number"
+            android:visibility="visible"/>
+
+        <!-- Friend 4-->
+    <TextView
+        android:id="@+id/friend4_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/friend3_share"
+        android:textSize="24sp"
+        android:text="friend4"/>
+        <EditText
+            android:id="@+id/et_friend4_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/friend4_share"
+            android:layout_above="@+id/split"
+            android:inputType="number"
+            android:visibility="visible"/>
+        <!--HIDDEN-->
+        <Button
+            android:id="@+id/split"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/friend4_share"
+            android:text="Split"
+            android:onClick="send"
+            />
+
+    </RelativeLayout>
 </LinearLayout>
