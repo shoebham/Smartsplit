@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ import org.json.JSONObject;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -59,16 +61,17 @@ public class AddExpense extends AppCompatActivity {
     public  RadioButton unequally;
     public  Button saveButton;
 
-    public  TextView your_share_text;
-    public  TextView friend_share_text;
-    public  EditText et_your_share;
-    public  EditText et_friend_share;
+
     public  TextView hidden1,hidden2,hidden3,hidden4;
     public  Toolbar toolbaradd;
     public EditText amountEditText;
     public ImageView hidden1_image,hidden2_image,hidden3_image,hidden4_image;
-    Map<String,String> contact_details = new HashMap<>();
-
+    public RelativeLayout relativeLayout;
+    public EditText et_friend_share1,et_friend_share2,et_friend_share3,et_friend_share4;
+    public  TextView friend_share1,friend_share2,friend_share3,friend_share4;
+    Map<String,String> contact_details = new LinkedHashMap<>();
+    Map<String,Integer> unEqualMap = new LinkedHashMap<>();
+    ArrayList<String> numbers = new ArrayList<>();
     //unequal share Editext
 
 
@@ -78,12 +81,12 @@ public class AddExpense extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
 
-
+        relativeLayout= (RelativeLayout)findViewById(R.id.relative_layout);
         //setting IDS
-        your_share_text = findViewById(R.id.your_share_text);
-        friend_share_text=findViewById(R.id.friend_share_text);
-        et_your_share =findViewById(R.id.et_your_share);
-        et_friend_share=findViewById(R.id.et_friend_share);
+       // your_share_text = findViewById(R.id.your_share_text);
+       // friend_share_text=findViewById(R.id.friend_share_text);
+         //   et_your_share =findViewById(R.id.et_your_share);
+      //  et_friend_share=findViewById(R.id.et_friend_share);
         hidden1 = findViewById(R.id.hidden1);
         hidden2 = findViewById(R.id.hidden2);
         hidden3 = findViewById(R.id.hidden3);
@@ -96,13 +99,18 @@ public class AddExpense extends AppCompatActivity {
         equally = findViewById(R.id.equally);
         unequally = findViewById(R.id.unequally);
 
+        friend_share1 = findViewById(R.id.friend1_share);
+        friend_share2 = findViewById(R.id.friend2_share);
+        friend_share3 = findViewById(R.id.friend3_share);
+        friend_share4 = findViewById(R.id.friend4_share);
+        et_friend_share1=findViewById(R.id.et_friend1_share);
+        et_friend_share2=findViewById(R.id.et_friend2_share);
+        et_friend_share3=findViewById(R.id.et_friend3_share);
+        et_friend_share4=findViewById(R.id.et_friend4_share);
         // if(getSupportActionBar() != null) {
         //    getSupportActionBar().setTitle(getString("Add Expense"));
         //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //}
-
-//Share UNequal
-
 
         Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -124,10 +132,8 @@ public class AddExpense extends AppCompatActivity {
             }
         });
         ImageButton contactAdd = findViewById(R.id.imageButton);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, CONTACTS);
         //contactAdd.setAdapter(adapter);
-
         contactAdd.setOnClickListener(new Button.OnClickListener(){
 
             //opening contact
@@ -135,12 +141,10 @@ public class AddExpense extends AppCompatActivity {
                 ActivityCompat.requestPermissions(AddExpense.this,
                         new String[]{Manifest.permission.READ_CONTACTS},
                         1);
-
             }
         });
 
     }
-
     //asking permission
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -192,27 +196,33 @@ public class AddExpense extends AppCompatActivity {
                         //Log.i("number", "The phone number is " + number);
                         //textView = findViewById(R.id.textView);
                         //contactName.setText(name);
+
                         contact_details.put(number,name);
                         for(String s:contact_details.keySet()) {
                             if (contact_details.size() == 1) {
                                 hidden1.setVisibility(View.VISIBLE);
                                 hidden1_image.setVisibility(View.VISIBLE);
                                 hidden1.setText("Name: " + contact_details.get(number) + " Number: " + s);
+                                friend_share1.setText(contact_details.get(number)+":-");
                             }if (contact_details.size() == 2) {
                                 hidden2.setVisibility(View.VISIBLE);
                                 hidden2_image.setVisibility(View.VISIBLE);
                                 hidden2.setText("Name: " + contact_details.get(number) + " Number: " + s);
+                                friend_share2.setText(contact_details.get(number)+":-");
                             }if (contact_details.size()==3){
                                 hidden3.setVisibility(View.VISIBLE);
                                 hidden3_image.setVisibility(View.VISIBLE);
                                 hidden3.setText("Name: " + contact_details.get(number) + " Number: " + s);
+                                friend_share3.setText(contact_details.get(number)+":-");
                             }if (contact_details.size()==4){
                                 hidden4.setVisibility(View.VISIBLE);
                                 hidden4_image.setVisibility(View.VISIBLE);
                                 hidden4.setText("Name: " + contact_details.get(number) + " Number: " + s);
+                                friend_share4.setText(contact_details.get(number)+":-");
                             }
 
                         }
+
                         Log.i("number",contact_details+" map size is "+contact_details.size());
                     }
                 }
@@ -233,18 +243,22 @@ public class AddExpense extends AppCompatActivity {
 
     public void makeVisible(View v){
         //making this visible
-        your_share_text.setVisibility(View.VISIBLE);
-        friend_share_text.setVisibility(View.VISIBLE);
-        et_your_share.setVisibility(View.VISIBLE);
-        et_friend_share.setVisibility(View.VISIBLE);
-    }
+        relativeLayout.setVisibility(View.VISIBLE);
 
+
+//        your_share_text.setVisibility(View.VISIBLE);
+//        friend_share_text.setVisibility(View.VISIBLE);
+//        et_your_share.setVisibility(View.VISIBLE);
+//        et_friend_share.setVisibility(View.VISIBLE);
+    }
     public void makeInVisible(View v){
-        //making this visible
-        your_share_text.setVisibility(View.GONE);
-        friend_share_text.setVisibility(View.GONE);
-        et_your_share.setVisibility(View.GONE);
-        et_friend_share.setVisibility(View.GONE);
+        //making this invisible
+//        your_share_text.setVisibility(View.GONE);
+//        friend_share_text.setVisibility(View.GONE);
+//        et_your_share.setVisibility(View.GONE);
+//        et_friend_share.setVisibility(View.GONE);
+        relativeLayout.setVisibility(View.GONE);
+
     }
 
 
@@ -252,47 +266,50 @@ public class AddExpense extends AppCompatActivity {
     //sending data to server
     public void send(View v){
         //AutoCompleteTextView contactsTextView= findViewById(R.id.contactAdd);
-
-        Boolean splitEqually=true;
+        //Boolean splitEqually=true;
         //String contacts = contactsTextView.getText().toString();
         Double amount = Double.parseDouble(amountEditText.getText().toString());
+        for(String s:contact_details.keySet()) {
+            numbers.add(s);
+        }
         if(equally.isChecked()) {
-            sendEqually(splitEqually, amount,number);
-
+            sendEqually(true, amount,contact_details);
         }
         else if(unequally.isChecked()){
-            Map<String,Integer> map = new HashMap<>();
 
-            String s = et_friend_share.getText().toString();
-            Integer amountFriend= Integer.parseInt(s);
-            number = number.trim();
-            map.put(number,amountFriend);
-            sendUnEqually(false,amount,map);
+            Log.i("numbers","unequal map is"+unEqualMap);
+            String s1 = friend_share1.getText().toString();
+            int amountFriend1 = Integer.parseInt(et_friend_share1.getText().toString());
+            int amountFriend2 = Integer.parseInt(et_friend_share2.getText().toString());
+            int amountFriend3 = Integer.parseInt(et_friend_share3.getText().toString());
+            int amountFriend4 = Integer.parseInt(et_friend_share4.getText().toString());
+            unEqualMap.put(numbers.get(0),amountFriend1);
+            unEqualMap.put(numbers.get(1),amountFriend2);
+            unEqualMap.put(numbers.get(2),amountFriend3);
+            unEqualMap.put(numbers.get(3),amountFriend4);
+            Log.i("numbers",unEqualMap+"");
+            sendUnEqually(false,amount,unEqualMap);
             Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
         }
 
     }
-    public void sendEqually(Boolean splitEqually, Double amount, String contact) {
+    public void sendEqually(Boolean splitEqually, Double amount,Map<String,String> paidFor) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         // Enter the correct url for your api service site
         JSONObject j = new JSONObject();
-        //"";
-        String url = "https://aislepay.herokuapp.com/testdata";
+        JSONArray array = new JSONArray();
+        String url = "https://paisa.free.beeceptor.com";
         try {
-          /*  JSONObject j1 = new JSONObject();
-            JSONArray array = new JSONArray();
-            j1.put("number",123);
-            j1.put("amount",123);
-            j1.put("number",69);
-            j1.put("amount",69);
-            array.put(j1);
-            j.put("splitEqually",true);
-            j.put("paidAmount",100);
-            j.put("paidBy",1234);
-            j.put("paidFor",array);*/
+            double splitAmount = amount/(paidFor.size()+1);
+            JSONObject j1 = new JSONObject();
+            for(String s:paidFor.keySet()) {
+                j1.put("number", s);
+                j1.put("amount", splitAmount);
+                array.put(j1);
+            }
             j.put("splitEqually",splitEqually);
             j.put("amount",amount);
-            j.put("contact",contact);
+            j.put("paidFor",array);
 
         }catch (Exception e){};
         // parser.parse(j);
@@ -317,16 +334,16 @@ public class AddExpense extends AppCompatActivity {
         // Enter the correct url for your api service site
         JSONObject j = new JSONObject();
         //"https://aislepay.herokuapp.com/testdata";
-        String url = "https://aislepay.herokuapp.com/testdata";
+        String url = "https://paisa.free.beeceptor.com";
         try {
             JSONObject j1 = new JSONObject();
             JSONArray array = new JSONArray();
             for(String s:paidFor.keySet()){
                 j1.put("number",s);
                 j1.put("amount",paidFor.get(s));
+                array.put(j1);
             }
 
-            array.put(j1);
             j.put("splitEqually",splitEqually);
             j.put("paidAmount",amount);
             j.put("paidFor",array);
