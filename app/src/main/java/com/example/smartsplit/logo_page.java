@@ -37,7 +37,7 @@ public class logo_page extends AppCompatActivity {
                             Intent i = new Intent(logo_page.this, HomeActivity.class);
                             startActivity(i);
                         } else {
-                            Intent mainPage = new Intent(logo_page.this, MainActivityo.class);
+                            Intent mainPage = new Intent(logo_page.this, SignupActivity.class);
                             startActivity(mainPage);
                         }
                         finish();

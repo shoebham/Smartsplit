@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent i=new Intent(MainActivity.this,MainActivityo.class);
+                Intent i=new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(i);
                 Toast.makeText(this,"You are log out",Toast.LENGTH_SHORT).show();
 
