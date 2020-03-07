@@ -29,9 +29,7 @@
             android:layout_alignParentEnd="true"
             android:focusable="true" />
       </androidx.appcompat.widget.Toolbar>
-
     <TextView
-
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,8 +49,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_add"/>
-
-
     <!-- Hidden Contact Details-->
 <RelativeLayout
     android:layout_width="wrap_content"
@@ -248,4 +244,12 @@
             />
 
     </RelativeLayout>
+    <Button
+        android:id="@+id/split2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/friend4_share"
+        android:text="Split"
+        android:onClick="send"
+        />
 </LinearLayout>

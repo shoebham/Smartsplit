@@ -60,7 +60,7 @@ public class AddExpense extends AppCompatActivity {
     public  RadioButton equally;
     public  RadioButton unequally;
     public  Button saveButton;
-
+    public  Button split2;
 
     public  TextView hidden1,hidden2,hidden3,hidden4;
     public  Toolbar toolbaradd;
@@ -103,6 +103,7 @@ public class AddExpense extends AppCompatActivity {
         et_friend_share2=findViewById(R.id.et_friend2_share);
         et_friend_share3=findViewById(R.id.et_friend3_share);
         et_friend_share4=findViewById(R.id.et_friend4_share);
+        split2 = findViewById(R.id.split2);
         // if(getSupportActionBar() != null) {
         //    getSupportActionBar().setTitle(getString("Add Expense"));
         //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -194,29 +195,28 @@ public class AddExpense extends AppCompatActivity {
                         //contactName.setText(name);
 
                         contact_details.put(number,name);
-                        for(String s:contact_details.keySet()) {
-                            if (contact_details.size() == 1) {
-                                hidden1.setVisibility(View.VISIBLE);
-                                clearAll.setVisibility(View.VISIBLE);
-                                hidden1.setText("Name: " + contact_details.get(number) + " Number: " + s);
-                                friend_share1.setText(contact_details.get(number)+":-");
-                            }if (contact_details.size() == 2) {
-                                hidden2.setVisibility(View.VISIBLE);
-                                hidden2.setText("Name: " + contact_details.get(number) + " Number: " + s);
-                                friend_share2.setText(contact_details.get(number)+":-");
-                            }if (contact_details.size()==3){
-                                hidden3.setVisibility(View.VISIBLE);
-                                hidden3.setText("Name: " + contact_details.get(number) + " Number: " + s);
-                                friend_share3.setText(contact_details.get(number)+":-");
-                            }if (contact_details.size()==4){
-                                hidden4.setVisibility(View.VISIBLE);
-                                hidden4.setText("Name: " + contact_details.get(number) + " Number: " + s);
-                                friend_share4.setText(contact_details.get(number)+":-");
-                            }
-
+                        Log.i("number",contact_details+" map size is "+contact_details.size());
+                    }
+                    for(String s:contact_details.keySet()) {
+                        if (contact_details.size() == 1) {
+                            hidden1.setVisibility(View.VISIBLE);
+                            clearAll.setVisibility(View.VISIBLE);
+                            hidden1.setText("Name: " + contact_details.get(number) + " Number: " + s);
+                            friend_share1.setText(contact_details.get(number)+":-");
+                        }if (contact_details.size() == 2) {
+                            hidden2.setVisibility(View.VISIBLE);
+                            hidden2.setText("Name: " + contact_details.get(number) + " Number: " + s);
+                            friend_share2.setText(contact_details.get(number)+":-");
+                        }if (contact_details.size()==3){
+                            hidden3.setVisibility(View.VISIBLE);
+                            hidden3.setText("Name: " + contact_details.get(number) + " Number: " + s);
+                            friend_share3.setText(contact_details.get(number)+":-");
+                        }if (contact_details.size()==4){
+                            hidden4.setVisibility(View.VISIBLE);
+                            hidden4.setText("Name: " + contact_details.get(number) + " Number: " + s);
+                            friend_share4.setText(contact_details.get(number)+":-");
                         }
 
-                        Log.i("number",contact_details+" map size is "+contact_details.size());
                     }
                 }
             }
@@ -247,6 +247,7 @@ public void clearAll(View v){
         //making this visible
       Log.i("numbers",contact_details.size()+"");
        relativeLayout.setVisibility(View.VISIBLE);
+        split2.setVisibility(View.GONE);
 //        your_share_text.setVisibility(View.VISIBLE);
 //        friend_share_text.setVisibility(View.VISIBLE);
 //        et_your_share.setVisibility(View.VISIBLE);
@@ -259,37 +260,41 @@ public void clearAll(View v){
 //        et_your_share.setVisibility(View.GONE);
 //        et_friend_share.setVisibility(View.GONE);
         relativeLayout.setVisibility(View.GONE);
+        split2.setVisibility(View.VISIBLE);
+
 
     }
     //sending data to server
-    public void send(View v){
+
+        public void send (View v){
+        try{
         //AutoCompleteTextView contactsTextView= findViewById(R.id.contactAdd);
         //Boolean splitEqually=true;
         //String contacts = contactsTextView.getText().toString();
         Double amount = Double.parseDouble(amountEditText.getText().toString());
-        for(String s:contact_details.keySet()) {
+        for (String s : contact_details.keySet()) {
             numbers.add(s);
         }
-        if(equally.isChecked()) {
-            sendEqually(true, amount,contact_details);
-        }
-        else if(unequally.isChecked()){
-            Log.i("numbers","unequal map is"+unEqualMap);
+        if (equally.isChecked()) {
+            sendEqually(true, amount, contact_details);
+        } else if (unequally.isChecked()) {
+            Log.i("numbers", "unequal map is" + unEqualMap);
             String s1 = friend_share1.getText().toString();
             int amountFriend1 = Integer.parseInt(et_friend_share1.getText().toString());
             int amountFriend2 = Integer.parseInt(et_friend_share2.getText().toString());
             int amountFriend3 = Integer.parseInt(et_friend_share3.getText().toString());
             int amountFriend4 = Integer.parseInt(et_friend_share4.getText().toString());
-            unEqualMap.put(numbers.get(0),amountFriend1);
-            unEqualMap.put(numbers.get(1),amountFriend2);
-            unEqualMap.put(numbers.get(2),amountFriend3);
-            unEqualMap.put(numbers.get(3),amountFriend4);
-            Log.i("numbers",unEqualMap+"unequal map");
-            sendUnEqually(false,amount,unEqualMap);
-            Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
+            unEqualMap.put(numbers.get(0), amountFriend1);
+            unEqualMap.put(numbers.get(1), amountFriend2);
+            unEqualMap.put(numbers.get(2), amountFriend3);
+            unEqualMap.put(numbers.get(3), amountFriend4);
+            Log.i("numbers", unEqualMap + "unequal map");
+            sendUnEqually(false, amount, unEqualMap);
+            Toast.makeText(this, "Data sent", Toast.LENGTH_LONG).show();
         }
-
+        }catch(Exception e){Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();}
     }
+
     public void sendEqually(Boolean splitEqually, Double amount,Map<String,String> paidFor) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         // Enter the correct url for your api service site
@@ -298,8 +303,9 @@ public void clearAll(View v){
         String url = "https://paisa.free.beeceptor.com";
         try {
             double splitAmount = amount/(paidFor.size()+1);
-            JSONObject j1 = new JSONObject();
+
             for(String s:paidFor.keySet()) {
+                JSONObject j1 = new JSONObject();
                 j1.put("number", s);
                 j1.put("amount", splitAmount);
                 array.put(j1);
