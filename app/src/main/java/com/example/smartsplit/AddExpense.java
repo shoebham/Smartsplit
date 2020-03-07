@@ -206,7 +206,6 @@ public class AddExpense extends AppCompatActivity {
                                 friend_share2.setText(contact_details.get(number)+":-");
                             }if (contact_details.size()==3){
                                 hidden3.setVisibility(View.VISIBLE);
-
                                 hidden3.setText("Name: " + contact_details.get(number) + " Number: " + s);
                                 friend_share3.setText(contact_details.get(number)+":-");
                             }if (contact_details.size()==4){
@@ -262,9 +261,6 @@ public void clearAll(View v){
         relativeLayout.setVisibility(View.GONE);
 
     }
-
-
-
     //sending data to server
     public void send(View v){
         //AutoCompleteTextView contactsTextView= findViewById(R.id.contactAdd);
@@ -278,7 +274,6 @@ public void clearAll(View v){
             sendEqually(true, amount,contact_details);
         }
         else if(unequally.isChecked()){
-
             Log.i("numbers","unequal map is"+unEqualMap);
             String s1 = friend_share1.getText().toString();
             int amountFriend1 = Integer.parseInt(et_friend_share1.getText().toString());
@@ -289,7 +284,7 @@ public void clearAll(View v){
             unEqualMap.put(numbers.get(1),amountFriend2);
             unEqualMap.put(numbers.get(2),amountFriend3);
             unEqualMap.put(numbers.get(3),amountFriend4);
-            Log.i("numbers",unEqualMap+"");
+            Log.i("numbers",unEqualMap+"unequal map");
             sendUnEqually(false,amount,unEqualMap);
             Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
         }
@@ -338,16 +333,21 @@ public void clearAll(View v){
         //"https://aislepay.herokuapp.com/testdata";
         String url = "https://paisa.free.beeceptor.com";
         try {
-            JSONObject j1 = new JSONObject();
+
             JSONArray array = new JSONArray();
             for(String s:paidFor.keySet()){
+                JSONObject j1 = new JSONObject();
+                Log.i("numbers","s is "+s);
                 j1.put("number",s);
                 j1.put("amount",paidFor.get(s));
+                Log.i("numbers","array is "+j1);
                 array.put(j1);
             }
+
             j.put("splitEqually",splitEqually);
             j.put("paidAmount",amount);
             j.put("paidFor",array);
+
             //j.put("splitEqually",splitEqually);
            // j.put("amount",amount);
           //  j.put("contact",contact);
