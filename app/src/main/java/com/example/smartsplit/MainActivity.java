@@ -2,6 +2,7 @@ package com.example.smartsplit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
