@@ -12,11 +12,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     EditText emailId, password;
@@ -75,9 +83,10 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
                                 Log.i("LOGIN EXCEPTION",task.getException().getMessage());
-                                Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             }
                             else{
+                                createSessionServer(mFirebaseAuth.getCurrentUser().getEmail());
                                 Intent intToHome = new Intent(LoginActivity.this,HomeActivity.class);
                                 startActivity(intToHome);
                             }
@@ -100,7 +109,31 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void createSessionServer(String userEmail) {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        // Enter the correct url for your api service site
+        JSONObject emailJSON = new JSONObject();
+        String url = "https://aislepay.herokuapp.com/createSessionAfterLogin";
+        try {
+            emailJSON.put("email", userEmail);
+        }catch (Exception e){
+            Log.i("EXCEPTION", e.getMessage());
+        };
+        // parser.parse(j);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, emailJSON,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("response",response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("response",error.toString());
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
     @Override
     protected void onStart() {
         super.onStart();

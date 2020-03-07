@@ -2,15 +2,20 @@ package com.example.smartsplit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,5 +57,27 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(new GroupFragment(),"Groups");
         viewPagerAdapter.addFragment(new ActivityFragment(),"Activity");
         viewPager.setAdapter(viewPagerAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.list,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent i=new Intent(MainActivity.this,MainActivityo.class);
+                startActivity(i);
+                Toast.makeText(this,"You are log out",Toast.LENGTH_SHORT).show();
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
