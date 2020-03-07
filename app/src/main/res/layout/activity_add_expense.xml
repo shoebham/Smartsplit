@@ -48,7 +48,8 @@
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_add"/>
+        android:src="@android:drawable/ic_menu_add"
+        android:contentDescription="@string/todo" />
     <!-- Hidden Contact Details-->
 <RelativeLayout
     android:layout_width="wrap_content"
@@ -86,7 +87,8 @@
         android:src="@android:drawable/presence_offline"
         android:onClick="clearAll"
         android:layout_below="@+id/hidden4"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:contentDescription="@string/todo" />
 </RelativeLayout>
     <!-- Hidden Contact Details-->
     <EditText
@@ -113,7 +115,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Split:"
+        android:text="@string/split"
         android:textSize="20sp" />
 
 
@@ -126,13 +128,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="makeInVisible"
-            android:text="Equally"/>
+            android:text="@string/equally"/>
 
         <RadioButton
             android:id="@+id/unequally"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Unequally"
+            android:text="@string/unequally"
             android:onClick="makeVisible"/>
 
     </RadioGroup>
@@ -163,7 +165,7 @@
             android:visibility="visible"
             android:textSize="24sp"
             android:layout_above="@id/friend_share_text"
-            android:text="Enter share of:"/>
+            android:text="@string/enter_share_of"/>
         <!-- Friend 1-->
     <TextView
         android:id="@+id/friend1_share"
@@ -171,7 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/friend_share_text"
         android:textSize="24sp"
-        android:text="friend1"/>
+        android:text="@string/friend1"/>
 
         <EditText
             android:id="@+id/et_friend1_share"
@@ -180,7 +182,9 @@
             android:layout_above="@+id/friend2_share"
             android:layout_toEndOf="@+id/friend1_share"
             android:inputType="number"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
         <!-- Friend 2-->
     <TextView
@@ -189,7 +193,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/friend1_share"
         android:textSize="24sp"
-        android:text="friend2"/>
+        android:text="@string/friend2"/>
         <EditText
             android:id="@+id/et_friend2_share"
             android:layout_width="wrap_content"
@@ -198,7 +202,9 @@
             android:layout_above="@+id/friend3_share"
             android:inputType="number"
 
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
         <!-- Friend 3-->
     <TextView
@@ -207,7 +213,7 @@
          android:layout_height="wrap_content"
          android:layout_below="@+id/friend2_share"
          android:textSize="24sp"
-         android:text="friend3"/>
+         android:text="@string/friend3"/>
         <EditText
             android:id="@+id/et_friend3_share"
             android:layout_width="wrap_content"
@@ -215,7 +221,9 @@
             android:layout_toEndOf="@+id/friend3_share"
             android:layout_above="@+id/friend4_share"
             android:inputType="number"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
         <!-- Friend 4-->
     <TextView
@@ -224,7 +232,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/friend3_share"
         android:textSize="24sp"
-        android:text="friend4"/>
+        android:text="@string/friend4"/>
         <EditText
             android:id="@+id/et_friend4_share"
             android:layout_width="wrap_content"
@@ -232,14 +240,16 @@
             android:layout_toEndOf="@+id/friend4_share"
             android:layout_above="@+id/split"
             android:inputType="number"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
         <!--HIDDEN-->
         <Button
             android:id="@+id/split"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/friend4_share"
-            android:text="Split"
+            android:text="@string/splitnosemi"
             android:onClick="send"
             />
 
@@ -248,8 +258,7 @@
         android:id="@+id/split2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/friend4_share"
-        android:text="Split"
+        android:text="@string/splitbold"
         android:onClick="send"
         />
 </LinearLayout>

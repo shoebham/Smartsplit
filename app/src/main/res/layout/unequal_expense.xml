@@ -9,17 +9,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter your share:"/>
+        android:text="@string/enter_your_share"/>
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:hint="@string/dollar_sign"
+        android:importantForAutofill="no"
+        android:inputType="number" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter contacts share:"/>
+        android:text="@string/enter_contacts_share"/>
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:hint="@string/dollar_sign"
+        android:importantForAutofill="no"
+        android:inputType="number" />
 </LinearLayout>

@@ -9,8 +9,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tab 2 Group"
-        android:textSize="30dp"
+        android:text="@string/tab_2_group"
+        android:textSize="30sp"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>

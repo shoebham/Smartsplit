@@ -16,6 +16,26 @@
     <string name="welcome_you_are_logged_in">Welcome! You are logged in</string>
     <string name="todo">TODO</string>
     <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="already_have_an_account_log_in_here">Already have an account? Log in here</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="not_registered_sign_up_here">Not registered? Sign Up here</string>
+    <string name="log_in">Log In</string>
+    <string name="split">Split:</string>
+    <string name="equally">Equally</string>
+    <string name="friend1">friend1</string>
+    <string name="unequally">Unequally</string>
+    <string name="tab_3_activity">Tab 3 Activity</string>
+    <string name="tab_2_group">Tab 2 Group</string>
+    <string name="enter_your_share">Enter your share:</string>
+    <string name="enter_contacts_share">Enter contacts share:</string>
+    <string name="dollar_sign">$</string>
+    <string name="friend4">friend4</string>
+    <string name="friend3">friend3</string>
+    <string name="friend2">friend2</string>
+    <string name="enter_share_of">Enter share of:</string>
+    <string name="splitnosemi">Split</string>
+    <string name="splitbold">Split</string>
     <string-array name="programming_languages">
         <item>C</item>
         <item>C++</item>
