@@ -64,58 +64,33 @@
         android:visibility="gone"
         />
 
-    <ImageView
-        android:id="@+id/hidden1_image"
-        android:layout_width="wrap_content"
-        android:layout_height="17dp"
-        android:layout_toEndOf="@+id/hidden1"
-        android:layout_toRightOf="@+id/hidden1"
-        android:src="@android:drawable/btn_dialog"
-        android:visibility="gone" />
-
     <TextView
         android:id="@+id/hidden2"
         android:layout_below="@id/hidden1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-    <ImageView
-        android:id="@+id/hidden2_image"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_below="@id/hidden1"
-        android:layout_toRightOf="@+id/hidden2"
-        android:src="@android:drawable/btn_dialog"
-        android:visibility="gone" />
+        android:visibility="gone"
+        />
     <TextView
         android:id="@+id/hidden3"
         android:layout_below="@+id/hidden2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
-    <ImageView
-        android:id="@+id/hidden3_image"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_below="@id/hidden2"
-        android:layout_toRightOf="@+id/hidden3"
-        android:src="@android:drawable/btn_dialog"
-        android:visibility="gone" />
     <TextView
         android:id="@+id/hidden4"
         android:layout_below="@id/hidden3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
-    <ImageView
-        android:id="@+id/hidden4_image"
+    <ImageButton
+        android:id="@+id/clearall"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_below="@id/hidden3"
-        android:layout_toRightOf="@+id/hidden4"
-        android:src="@android:drawable/btn_dialog"
-        android:visibility="gone" />
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/presence_offline"
+        android:onClick="clearAll"
+        android:layout_below="@+id/hidden4"
+        android:visibility="gone"/>
 </RelativeLayout>
     <!-- Hidden Contact Details-->
     <EditText
