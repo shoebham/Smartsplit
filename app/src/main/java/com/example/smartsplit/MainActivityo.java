@@ -17,6 +17,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.Map;
+
+
 public class MainActivityo extends AppCompatActivity {
     EditText emailId, password;
     Button btnSignUp;
@@ -54,10 +68,11 @@ public class MainActivityo extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
-                                Log.i("LOGIN EXCEPTION",task.getException().getMessage());
+                                Log.i("SIGNUP EXCEPTION",task.getException().getMessage());
                                 Toast.makeText(MainActivityo.this,"SignUp Unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
                             }
                             else {
+                                createUserAndSession(emailId.getText().toString());
                                 startActivity(new Intent(MainActivityo.this,HomeActivity.class));
                             }
                         }
@@ -78,5 +93,64 @@ public class MainActivityo extends AppCompatActivity {
             }
         });
     }
+    public void createUserAndSession(String userEmail) {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        // Enter the correct url for your api service site
+        JSONObject emailJSON = new JSONObject();
+        String url = "https://aislepay.herokuapp.com/createNewUser";
+        try {
+            emailJSON.put("email", userEmail);
+        }catch (Exception e){
+            Log.i("EXCEPTION", e.getMessage());
+        };
+        // parser.parse(j);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, emailJSON,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("response",response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("response",error.toString());
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
 
 }
+/*
+*
+* RequestQueue requestQueue = Volley.newRequestQueue(this);
+        // Enter the correct url for your api service site
+        JSONObject j = new JSONObject();
+        JSONArray array = new JSONArray();
+        String url = "https://paisa.free.beeceptor.com";
+        try {
+            double splitAmount = amount/(paidFor.size()+1);
+            JSONObject j1 = new JSONObject();
+            for(String s:paidFor.keySet()) {
+                j1.put("number", s);
+                j1.put("amount", splitAmount);
+                array.put(j1);
+            }
+            j.put("splitEqually",splitEqually);
+            j.put("amount",amount);
+            j.put("paidFor",array);
+
+        }catch (Exception e){};
+        // parser.parse(j);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, j,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("response",response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("response",error.toString());
+            }
+        });
+        requestQueue.add(jsonObjectRequest);*/
