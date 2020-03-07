@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".logo_page">
 
-    <TextView
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="SmartSplit"
-        android:textAlignment="center"
-        android:textSize="50dp"/>
+        android:layout_height="match_parent"
+        android:contentDescription="@string/todo"
+        app:srcCompat="@drawable/logo" />
 
 </RelativeLayout>

@@ -42,7 +42,7 @@ public class logo_page extends AppCompatActivity {
                         }
                         finish();
                     }
-                },1000);
+                },500);
             }
         };
 
