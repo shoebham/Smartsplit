@@ -65,7 +65,7 @@ public class AddExpense extends AppCompatActivity {
     public  TextView hidden1,hidden2,hidden3,hidden4;
     public  Toolbar toolbaradd;
     public EditText amountEditText;
-    public ImageView hidden1_image,hidden2_image,hidden3_image,hidden4_image;
+    public ImageButton clearAll;
     public RelativeLayout relativeLayout;
     public EditText et_friend_share1,et_friend_share2,et_friend_share3,et_friend_share4;
     public  TextView friend_share1,friend_share2,friend_share3,friend_share4;
@@ -91,14 +91,10 @@ public class AddExpense extends AppCompatActivity {
         hidden2 = findViewById(R.id.hidden2);
         hidden3 = findViewById(R.id.hidden3);
         hidden4 = findViewById(R.id.hidden4);
-        hidden1_image = findViewById(R.id.hidden1_image);
-        hidden2_image = findViewById(R.id.hidden2_image);
-        hidden3_image = findViewById(R.id.hidden3_image);
-        hidden4_image = findViewById(R.id.hidden4_image);
         amountEditText=findViewById(R.id.amount);
         equally = findViewById(R.id.equally);
         unequally = findViewById(R.id.unequally);
-
+        clearAll = findViewById(R.id.clearall);
         friend_share1 = findViewById(R.id.friend1_share);
         friend_share2 = findViewById(R.id.friend2_share);
         friend_share3 = findViewById(R.id.friend3_share);
@@ -201,22 +197,20 @@ public class AddExpense extends AppCompatActivity {
                         for(String s:contact_details.keySet()) {
                             if (contact_details.size() == 1) {
                                 hidden1.setVisibility(View.VISIBLE);
-                                hidden1_image.setVisibility(View.VISIBLE);
+                                clearAll.setVisibility(View.VISIBLE);
                                 hidden1.setText("Name: " + contact_details.get(number) + " Number: " + s);
                                 friend_share1.setText(contact_details.get(number)+":-");
                             }if (contact_details.size() == 2) {
                                 hidden2.setVisibility(View.VISIBLE);
-                                hidden2_image.setVisibility(View.VISIBLE);
                                 hidden2.setText("Name: " + contact_details.get(number) + " Number: " + s);
                                 friend_share2.setText(contact_details.get(number)+":-");
                             }if (contact_details.size()==3){
                                 hidden3.setVisibility(View.VISIBLE);
-                                hidden3_image.setVisibility(View.VISIBLE);
+
                                 hidden3.setText("Name: " + contact_details.get(number) + " Number: " + s);
                                 friend_share3.setText(contact_details.get(number)+":-");
                             }if (contact_details.size()==4){
                                 hidden4.setVisibility(View.VISIBLE);
-                                hidden4_image.setVisibility(View.VISIBLE);
                                 hidden4.setText("Name: " + contact_details.get(number) + " Number: " + s);
                                 friend_share4.setText(contact_details.get(number)+":-");
                             }
@@ -231,6 +225,15 @@ public class AddExpense extends AppCompatActivity {
     }
 
 
+public void clearAll(View v){
+        contact_details.clear();
+         hidden1.setVisibility(View.GONE);
+         hidden2.setVisibility(View.GONE);
+         hidden3.setVisibility(View.GONE);
+         hidden4.setVisibility(View.GONE);
+         clearAll.setVisibility(View.GONE);
+        Log.i("numbers",contact_details+"");
+}
 
     public void openMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
@@ -243,9 +246,8 @@ public class AddExpense extends AppCompatActivity {
 
     public void makeVisible(View v){
         //making this visible
-        relativeLayout.setVisibility(View.VISIBLE);
-
-
+      Log.i("numbers",contact_details.size()+"");
+       relativeLayout.setVisibility(View.VISIBLE);
 //        your_share_text.setVisibility(View.VISIBLE);
 //        friend_share_text.setVisibility(View.VISIBLE);
 //        et_your_share.setVisibility(View.VISIBLE);
@@ -343,7 +345,6 @@ public class AddExpense extends AppCompatActivity {
                 j1.put("amount",paidFor.get(s));
                 array.put(j1);
             }
-
             j.put("splitEqually",splitEqually);
             j.put("paidAmount",amount);
             j.put("paidFor",array);
