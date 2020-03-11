@@ -246,19 +246,17 @@ public void clearAll(View v){
     public void makeVisible(View v){
         //making this visible
       Log.i("numbers",contact_details.size()+"");
-       relativeLayout.setVisibility(View.VISIBLE);
-        split2.setVisibility(View.GONE);
-//        your_share_text.setVisibility(View.VISIBLE);
-//        friend_share_text.setVisibility(View.VISIBLE);
-//        et_your_share.setVisibility(View.VISIBLE);
-//        et_friend_share.setVisibility(View.VISIBLE);
+      if(contact_details.size()==0){
+          relativeLayout.setVisibility(View.GONE);
+          split2.setVisibility(View.VISIBLE);
+      }
+        else{  relativeLayout.setVisibility(View.VISIBLE); split2.setVisibility(View.GONE);}
+
+
+
     }
     public void makeInVisible(View v){
         //making this invisible
-//        your_share_text.setVisibility(View.GONE);
-//        friend_share_text.setVisibility(View.GONE);
-//        et_your_share.setVisibility(View.GONE);
-//        et_friend_share.setVisibility(View.GONE);
         relativeLayout.setVisibility(View.GONE);
         split2.setVisibility(View.VISIBLE);
 
