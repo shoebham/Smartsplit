@@ -69,7 +69,7 @@ public class SignupActivity extends AppCompatActivity {
                             }
                             else {
                                 createUserAndSession(emailId.getText().toString());
-                                startActivity(new Intent(SignupActivity.this,HomeActivity.class));
+                                startActivity(new Intent(SignupActivity.this,MainActivity.class));
                             }
                         }
                     });
