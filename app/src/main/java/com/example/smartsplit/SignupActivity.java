@@ -69,7 +69,8 @@ public class SignupActivity extends AppCompatActivity {
                             }
                             else {
                                 createUserAndSession(emailId.getText().toString());
-                                startActivity(new Intent(SignupActivity.this,MainActivity.class));
+                                startActivity(new Intent(SignupActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                finish();
                             }
                         }
                     });
@@ -84,8 +85,9 @@ public class SignupActivity extends AppCompatActivity {
         tvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SignupActivity.this,LoginActivity.class);
+                Intent i = new Intent(SignupActivity.this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
+                finish();
             }
         });
     }
@@ -114,7 +116,6 @@ public class SignupActivity extends AppCompatActivity {
         });
         requestQueue.add(jsonObjectRequest);
     }
-
 }
 /*
 *

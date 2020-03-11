@@ -51,8 +51,9 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();  //User Login Check
                 if( mFirebaseUser != null ){
                     Toast.makeText(LoginActivity.this,"You are logged in",Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
+                    finish();
                 }
                 else{
                     Toast.makeText(LoginActivity.this,"Please Login",Toast.LENGTH_SHORT).show();
@@ -87,8 +88,9 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else{
                                 createSessionServer(mFirebaseAuth.getCurrentUser().getEmail());
-                                Intent intToHome = new Intent(LoginActivity.this,MainActivity.class);
+                                Intent intToHome = new Intent(LoginActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intToHome);
+                                finish();
                             }
                         }
                     });
@@ -104,8 +106,9 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intSignUp = new Intent(LoginActivity.this, SignupActivity.class);
+                Intent intSignUp = new Intent(LoginActivity.this, SignupActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intSignUp);
+                finish();
             }
         });
     }

@@ -74,10 +74,19 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent i=new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(i);
+                finish();
                 Toast.makeText(this,"You are logged out",Toast.LENGTH_SHORT).show();
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
