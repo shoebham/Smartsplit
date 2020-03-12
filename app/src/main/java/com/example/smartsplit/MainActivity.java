@@ -69,24 +69,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent i=new Intent(MainActivity.this, SignupActivity.class);
-                startActivity(i);
-                finish();
+                //Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 Toast.makeText(this,"You are logged out",Toast.LENGTH_SHORT).show();
-
+                finish();
+                //startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 }
