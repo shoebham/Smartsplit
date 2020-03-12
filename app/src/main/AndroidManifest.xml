@@ -10,29 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".logo_page"
-            android:noHistory="true">
+        <activity android:name=".logo_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".AddExpense"/>
-
+        <activity android:name=".AddExpense"/>
         <activity
             android:name=".SignupActivity" android:label="@string/app_name"
-            android:noHistory="true" android:excludeFromRecents="true"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity
-            android:name=".LoginActivity"
-            android:noHistory="true" android:excludeFromRecents="true"/>
-
-        <activity
-            android:name=".MainActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".MainActivity"/>
 
     </application>
 </manifest>

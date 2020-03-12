@@ -2,32 +2,71 @@ package com.example.smartsplit;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
-
-
 public class SignupActivity extends AppCompatActivity {
+
+
+    private Spinner spinner;
+    private EditText editText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup);
+
+        spinner = findViewById(R.id.spinnerCountries);
+        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, CountryData.countryNames));
+
+        editText = findViewById(R.id.editTextPhone);
+
+        findViewById(R.id.buttonContinue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String code = CountryData.countryAreaCodes[spinner.getSelectedItemPosition()];
+
+                String number = editText.getText().toString().trim();
+
+                if (number.isEmpty() || number.length() < 10) {
+                    editText.setError("Valid number is required");
+                    editText.requestFocus();
+                    return;
+                }
+
+                String phoneNumber = "+" + code + number;
+
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                intent.putExtra("phonenumber", phoneNumber);
+                startActivity(intent);
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+            startActivity(intent);
+        }
+    }
+}
+/*
+*
+*
+public class SignupActivity extends AppCompatActivity {
+
     EditText emailId, password;
     Button btnSignUp;
     TextView tvSignIn;
@@ -69,7 +108,7 @@ public class SignupActivity extends AppCompatActivity {
                             }
                             else {
                                 createUserAndSession(emailId.getText().toString());
-                                startActivity(new Intent(SignupActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                //startActivity(new Intent(SignupActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
                                 finish();
                             }
                         }
@@ -91,6 +130,12 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+}
+
+ */
+    /*
+
+
     public void createUserAndSession(String userEmail) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         // Enter the correct url for your api service site
@@ -116,7 +161,7 @@ public class SignupActivity extends AppCompatActivity {
         });
         requestQueue.add(jsonObjectRequest);
     }
-}
+}*/
 /*
 *
 * RequestQueue requestQueue = Volley.newRequestQueue(this);
