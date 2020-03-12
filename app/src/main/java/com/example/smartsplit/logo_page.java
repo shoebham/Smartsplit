@@ -33,7 +33,7 @@ public class logo_page extends AppCompatActivity {
                     public void run() {
                         FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
                         if (mFirebaseUser != null) {
-                            Log.i("USER EMAIL",mFirebaseUser.getEmail());
+                            //Log.i("USER EMAIL",mFirebaseUser.getEmail());
                             Intent i = new Intent(logo_page.this, MainActivity.class);
                             startActivity(i);
                         } else {
