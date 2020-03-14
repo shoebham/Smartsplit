@@ -32,12 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         mAuth = FirebaseAuth.getInstance();
-
         progressBar = findViewById(R.id.progressbar);
         editText = findViewById(R.id.editTextCode);
-
         String phonenumber = getIntent().getStringExtra("phonenumber");
         sendVerificationCode(phonenumber);
 
@@ -48,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
                 String code = editText.getText().toString().trim();
 
                 if (code.isEmpty() || code.length() < 6) {
-
                     editText.setError("Enter code...");
                     editText.requestFocus();
                     return;
@@ -70,19 +66,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                             startActivity(intent);
-
                         } else {
                             Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
-
     private void sendVerificationCode(String number) {
         progressBar.setVisibility(View.VISIBLE);
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -94,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
         );
 
     }
-
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks
             mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 

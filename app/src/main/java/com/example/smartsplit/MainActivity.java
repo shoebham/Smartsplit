@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
-        FloatingActionButton aeb = findViewById(R.id.aeb);
+        com.github.clans.fab.FloatingActionButton aeb = findViewById(R.id.aeb);
         aeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
