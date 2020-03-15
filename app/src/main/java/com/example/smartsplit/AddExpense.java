@@ -7,6 +7,8 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
+import android.app.Notification;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +19,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.Layout;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -25,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.QuickContactBadge;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,6 +40,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -46,6 +52,7 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -64,8 +71,8 @@ public class AddExpense extends AppCompatActivity {
     public  RadioButton unequally;
     public  Button saveButton;
     public  Button split2;
-
-    public  TextView hidden1,hidden2,hidden3,hidden4;
+    public  Chip  hidden1;
+    public  Chip hidden2,hidden3,hidden4;
     public  Toolbar toolbaradd;
     public EditText amountEditText;
     public ImageButton clearAll;
@@ -74,29 +81,24 @@ public class AddExpense extends AppCompatActivity {
     public  TextView friend_share1,friend_share2,friend_share3,friend_share4;
     Map<String,String> contact_details = new LinkedHashMap<>();
     Map<String,Integer> unEqualMap = new LinkedHashMap<>();
-    ArrayList<String> numbers = new ArrayList<>();
+    ArrayList<String> numbers = new ArrayList<String>();
+    int start = 0;
     //unequal share Editext
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
         relativeLayout= (RelativeLayout)findViewById(R.id.relative_layout);
         //setting IDS
-       // your_share_text = findViewById(R.id.your_share_text);
-       // friend_share_text=findViewById(R.id.friend_share_text);
-         //   et_your_share =findViewById(R.id.et_your_share);
-      //  et_friend_share=findViewById(R.id.et_friend_share);
-        hidden1 = findViewById(R.id.hidden1);
-        hidden2 = findViewById(R.id.hidden2);
-        hidden3 = findViewById(R.id.hidden3);
-        hidden4 = findViewById(R.id.hidden4);
+//        hidden1 = findViewById(R.id.hidden1);
+//
+//        hidden2 = findViewById(R.id.hidden2);
+//        hidden3 = findViewById(R.id.hidden3);
+//        hidden4 = findViewById(R.id.hidden4);
         amountEditText=findViewById(R.id.amount);
         equally = findViewById(R.id.equally);
         unequally = findViewById(R.id.unequally);
-        clearAll = findViewById(R.id.clearall);
+//        clearAll = findViewById(R.id.clearall);
         friend_share1 = findViewById(R.id.friend1_share);
         friend_share2 = findViewById(R.id.friend2_share);
         friend_share3 = findViewById(R.id.friend3_share);
@@ -111,14 +113,14 @@ public class AddExpense extends AppCompatActivity {
         //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //}
 
-        Button saveButton = findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "Data Saved", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
-            }
-        });
+//        Button saveButton = findViewById(R.id.saveButton);
+//        saveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Snackbar.make(v, "Data Saved", Snackbar.LENGTH_SHORT)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         Toolbar toolbaradd = findViewById(R.id.toolbaradd);
         setSupportActionBar(toolbaradd);
@@ -130,7 +132,7 @@ public class AddExpense extends AppCompatActivity {
                 openMainActivity();
             }
         });
-        ImageButton contactAdd = findViewById(R.id.imageButton);
+        ImageView contactAdd = findViewById(R.id.imageButton);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, CONTACTS);
         //contactAdd.setAdapter(adapter);
         contactAdd.setOnClickListener(new Button.OnClickListener(){
@@ -195,36 +197,71 @@ public class AddExpense extends AppCompatActivity {
                         //Log.i("number", "The phone number is " + number);
                         //textView = findViewById(R.id.textView);
                         //contactName.setText(name);
-
                         contact_details.put(number,name);
-                        Log.i("number",contact_details+" map size is "+contact_details.size());
                     }
-                    for(String s:contact_details.keySet()) {
-                        if (contact_details.size() == 1) {
-                            hidden1.setVisibility(View.VISIBLE);
-                            clearAll.setVisibility(View.VISIBLE);
-                            hidden1.setText("Name: " + contact_details.get(number) + " Number: " + s);
-                            friend_share1.setText(contact_details.get(number)+":-");
-                        }if (contact_details.size() == 2) {
-                            hidden2.setVisibility(View.VISIBLE);
-                            hidden2.setText("Name: " + contact_details.get(number) + " Number: " + s);
-                            friend_share2.setText(contact_details.get(number)+":-");
-                        }if (contact_details.size()==3){
-                            hidden3.setVisibility(View.VISIBLE);
-                            hidden3.setText("Name: " + contact_details.get(number) + " Number: " + s);
-                            friend_share3.setText(contact_details.get(number)+":-");
-                        }if (contact_details.size()==4){
-                            hidden4.setVisibility(View.VISIBLE);
-                            hidden4.setText("Name: " + contact_details.get(number) + " Number: " + s);
-                            friend_share4.setText(contact_details.get(number)+":-");
-                        }
-
-                    }
+                    put_in_contacts();
+                    Log.i("number",contact_details+" map size is "+contact_details.size());
                 }
             }
         }
     }
 
+
+    public void put_in_contacts(){
+      //  clearAll.setVisibility(View.VISIBLE);
+        final ChipGroup chipGroup = findViewById(R.id.chip_group);
+        List<String> numbers_list = new ArrayList<String>(contact_details.keySet());
+        for(int i=start;i<numbers_list.size();i++){
+            start = start+1;
+            Log.i("numbers",start+"");
+            final String key = numbers_list.get(i);
+            final String tagName = contact_details.get(key);
+            final Chip chip = new Chip(this);
+            int paddingDp = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 10,
+                    getResources().getDisplayMetrics());
+            chip.setPadding(paddingDp, paddingDp, paddingDp, paddingDp);
+            chip.setText(tagName);
+            chip.setOnCloseIconClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    contact_details.remove(key);
+                    start-=1;
+                    chipGroup.removeView(chip);
+                }
+            });
+
+            chip.setCloseIconEnabled(true);
+            chipGroup.addView(chip);
+        }
+
+//        for(final String s:contact_details.keySet()) {
+//            switch (contact_details.size()){
+//                case 1:
+//                    hidden1.setVisibility(View.VISIBLE);
+//                    hidden1.setText("Name: " + contact_details.get(s) + " Number: " + s);
+//                    friend_share1.setText(contact_details.get(number)+":-");
+//                    break;
+//                case 2:
+//                    hidden2.setVisibility(View.VISIBLE);
+//                    hidden2.setText("Name: " + contact_details.get(s) + " Number: " + s);
+//                    friend_share2.setText(contact_details.get(s)+":-");
+//                    break;
+//                case 3:
+//                    hidden3.setVisibility(View.VISIBLE);
+//                    hidden3.setText("Name: " + contact_details.get(s) + " Number: " + s);
+//                    friend_share3.setText(contact_details.get(s)+":-");
+//                    break;
+//                case 4:
+//                    hidden4.setVisibility(View.VISIBLE);
+//                    hidden4.setText("Name: " + contact_details.get(s) + " Number: " + s);
+//                    friend_share4.setText(contact_details.get(s)+":-");
+//                    break;
+//            }
+//
+//
+//        }
+    }
 
 public void clearAll(View v){
         contact_details.clear();

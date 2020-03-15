@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:elevation="4dp"
-            android:id="@+id/toolbar"/>
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/design_default_color_on_secondary"-->
+<!--            android:elevation="4dp"-->
+<!--            android:id="@+id/toolbar"/>-->
 
 
         <com.google.android.material.tabs.TabLayout
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorColor="@color/common_google_signin_btn_text_dark_default"
             app:tabIndicatorHeight="2dp"
             app:tabMode="fixed" />
     </com.google.android.material.appbar.AppBarLayout>

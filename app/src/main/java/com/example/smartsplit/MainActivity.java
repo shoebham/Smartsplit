@@ -1,6 +1,7 @@
 package com.example.smartsplit;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,14 +26,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         TabLayout tabLayout = findViewById(R.id.tablayout);
 
         ViewPager viewPager = findViewById(R.id.myViewPager);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setBackgroundColor(Color.BLACK);
+        tabLayout.setTabTextColors(Color.WHITE, Color.GREEN);
 
         com.github.clans.fab.FloatingActionButton aeb = findViewById(R.id.aeb);
         aeb.setOnClickListener(new View.OnClickListener() {
