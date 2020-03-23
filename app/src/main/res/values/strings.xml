@@ -36,6 +36,7 @@
     <string name="enter_share_of">Enter share of:</string>
     <string name="splitnosemi">Split</string>
     <string name="splitbold">Split</string>
+    <string name="Rs">\u20B9</string>
     <string-array name="programming_languages">
         <item>C</item>
         <item>C++</item>

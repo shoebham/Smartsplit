@@ -8,6 +8,7 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Notification;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.text.Layout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -28,6 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -44,6 +47,8 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textview.MaterialTextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,7 +65,7 @@ public class AddExpense extends AppCompatActivity {
     private static final String[] CONTACTS = new String[]{
             "Angad", "Deekshant", "Preetam", "Shubham", "Vibhu"
     };
-
+    public String phone_number_user;
     public String number;
     public String name;
     public  AutoCompleteTextView contacts;
@@ -76,8 +81,9 @@ public class AddExpense extends AppCompatActivity {
     public  Toolbar toolbaradd;
     public EditText amountEditText;
     public ImageButton clearAll;
+    public TextInputEditText et_friend_share1;
     public RelativeLayout relativeLayout;
-    public EditText et_friend_share1,et_friend_share2,et_friend_share3,et_friend_share4;
+    public EditText et_friend_share2,et_friend_share3,et_friend_share4;
     public  TextView friend_share1,friend_share2,friend_share3,friend_share4;
     Map<String,String> contact_details = new LinkedHashMap<>();
     Map<String,Integer> unEqualMap = new LinkedHashMap<>();
@@ -88,25 +94,13 @@ public class AddExpense extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
-        relativeLayout= (RelativeLayout)findViewById(R.id.relative_layout);
+        Intent i =getIntent();
+        phone_number_user=i.getStringExtra("phone_number_user");
+        Log.i("numbers",i.getStringExtra("phone_number_user")+" in AddExpense");
         //setting IDS
-//        hidden1 = findViewById(R.id.hidden1);
-//
-//        hidden2 = findViewById(R.id.hidden2);
-//        hidden3 = findViewById(R.id.hidden3);
-//        hidden4 = findViewById(R.id.hidden4);
         amountEditText=findViewById(R.id.amount);
         equally = findViewById(R.id.equally);
         unequally = findViewById(R.id.unequally);
-//        clearAll = findViewById(R.id.clearall);
-        friend_share1 = findViewById(R.id.friend1_share);
-        friend_share2 = findViewById(R.id.friend2_share);
-        friend_share3 = findViewById(R.id.friend3_share);
-        friend_share4 = findViewById(R.id.friend4_share);
-        et_friend_share1=findViewById(R.id.et_friend1_share);
-        et_friend_share2=findViewById(R.id.et_friend2_share);
-        et_friend_share3=findViewById(R.id.et_friend3_share);
-        et_friend_share4=findViewById(R.id.et_friend4_share);
         split2 = findViewById(R.id.split2);
         // if(getSupportActionBar() != null) {
         //    getSupportActionBar().setTitle(getString("Add Expense"));
@@ -134,6 +128,7 @@ public class AddExpense extends AppCompatActivity {
         });
         ImageView contactAdd = findViewById(R.id.imageButton);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, CONTACTS);
+
         //contactAdd.setAdapter(adapter);
         contactAdd.setOnClickListener(new Button.OnClickListener(){
 
@@ -144,7 +139,6 @@ public class AddExpense extends AppCompatActivity {
                         1);
             }
         });
-
     }
     //asking permission
     @Override
@@ -155,7 +149,7 @@ public class AddExpense extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (contact_details.size()>=4){
+                    if (contact_details.size()>=100){
                         Toast.makeText(this,"Contact length exceeds limit",Toast.LENGTH_LONG).show();
                         break;
                     }
@@ -171,7 +165,6 @@ public class AddExpense extends AppCompatActivity {
                 }
                 return;
             }
-
             // other 'case' lines to check for other
             // permissions this app might request
         }
@@ -233,106 +226,95 @@ public class AddExpense extends AppCompatActivity {
 
             chip.setCloseIconEnabled(true);
             chipGroup.addView(chip);
+
         }
 
-//        for(final String s:contact_details.keySet()) {
-//            switch (contact_details.size()){
-//                case 1:
-//                    hidden1.setVisibility(View.VISIBLE);
-//                    hidden1.setText("Name: " + contact_details.get(s) + " Number: " + s);
-//                    friend_share1.setText(contact_details.get(number)+":-");
-//                    break;
-//                case 2:
-//                    hidden2.setVisibility(View.VISIBLE);
-//                    hidden2.setText("Name: " + contact_details.get(s) + " Number: " + s);
-//                    friend_share2.setText(contact_details.get(s)+":-");
-//                    break;
-//                case 3:
-//                    hidden3.setVisibility(View.VISIBLE);
-//                    hidden3.setText("Name: " + contact_details.get(s) + " Number: " + s);
-//                    friend_share3.setText(contact_details.get(s)+":-");
-//                    break;
-//                case 4:
-//                    hidden4.setVisibility(View.VISIBLE);
-//                    hidden4.setText("Name: " + contact_details.get(s) + " Number: " + s);
-//                    friend_share4.setText(contact_details.get(s)+":-");
-//                    break;
-//            }
-//
-//
-//        }
     }
-
-public void clearAll(View v){
-        contact_details.clear();
-         hidden1.setVisibility(View.GONE);
-         hidden2.setVisibility(View.GONE);
-         hidden3.setVisibility(View.GONE);
-         hidden4.setVisibility(View.GONE);
-         clearAll.setVisibility(View.GONE);
-        Log.i("numbers",contact_details+"");
-}
-
     public void openMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
     private int getString(String add_expense) {
         return 0;
     }
-
     public void makeVisible(View v){
-        //making this visible
-      Log.i("numbers",contact_details.size()+"");
-      if(contact_details.size()==0){
-          relativeLayout.setVisibility(View.GONE);
-          split2.setVisibility(View.VISIBLE);
-      }
-        else{  relativeLayout.setVisibility(View.VISIBLE); split2.setVisibility(View.GONE);}
+        final Dialog dialog = new Dialog(AddExpense.this);
+        dialog.setContentView(R.layout.test);
+        dialog.setTitle("Title...");
+        ArrayAdapter<String> adpater_contacts = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_activated_1);
+        for(String s:contact_details.keySet()){adpater_contacts.add(contact_details.get(s));}
+        ListView listView = dialog.findViewById(R.id.unequal_list);
+        listView.setAdapter(adpater_contacts);
 
 
-
+//        RelativeLayout relativeLayout = dialog.findViewById(R.id.relative_layout3);
+////        RelativeLayout.LayoutParams relativeLayoutParams =  new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT , RelativeLayout.LayoutParams.MATCH_PARENT);
+////        relativeLayout.setLayoutParams(relativeLayoutParams);
+//        for(int k = 1 ; k <= contact_details.size() ; ++k) {
+//            LinearLayout linearLayout = new LinearLayout(this);
+//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//            linearLayout.setId(k);
+//            if (k > 1) {
+//                params.addRule(RelativeLayout.BELOW, k - 1);
+//            }
+//            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+//            linearLayout.setLayoutParams(params);
+//            for (String s : contact_details.keySet()) {
+//                TextView t = new TextView(this);
+//                EditText et = new EditText(this);
+//                t.setText(contact_details.get(s));
+//                linearLayout.addView(t);
+//                linearLayout.addView(et);
+//            }
+//            relativeLayout.addView(linearLayout, params);
+//        }
+//        for(String s:contact_details.keySet()){
+//            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
+//                    RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        LinearLayout l = new LinearLayout(this);
+//        int i=0;
+//            i++;
+//            l.setId(i);
+//            if(i>1)
+//            {
+//                relativeParams.addRule(RelativeLayout.BELOW, i-1);
+//            }
+//            .setLayoutParams(params);
+//            TextView t = new TextView(this);
+//            EditText et = new EditText(this);
+//            t.setText(contact_details.get(s));
+//            l.addView(t);
+//            l.addView(et);
+//            l.setId(i);
+//            l.setOrientation(LinearLayout.HORIZONTAL);
+//            relativeParams.addRule(RelativeLayout.BELOW,l.getId());
+//            relativeLayout.addView(l,relativeParams);
+//
+//        }
+        dialog.show();
     }
     public void makeInVisible(View v){
-        //making this invisible
-        relativeLayout.setVisibility(View.GONE);
-        split2.setVisibility(View.VISIBLE);
-
 
     }
     //sending data to server
 
         public void send (View v){
         try{
-        //AutoCompleteTextView contactsTextView= findViewById(R.id.contactAdd);
-        //Boolean splitEqually=true;
-        //String contacts = contactsTextView.getText().toString();
         Double amount = Double.parseDouble(amountEditText.getText().toString());
         for (String s : contact_details.keySet()) {
             numbers.add(s);
         }
         if (equally.isChecked()) {
-            sendEqually(true, amount, contact_details);
+            sendEqually(true, amount, contact_details,phone_number_user);
+            Toast.makeText(this, "Data sent", Toast.LENGTH_LONG).show();
         } else if (unequally.isChecked()) {
-            Log.i("numbers", "unequal map is" + unEqualMap);
-            String s1 = friend_share1.getText().toString();
-            int amountFriend1 = Integer.parseInt(et_friend_share1.getText().toString());
-            int amountFriend2 = Integer.parseInt(et_friend_share2.getText().toString());
-            int amountFriend3 = Integer.parseInt(et_friend_share3.getText().toString());
-            int amountFriend4 = Integer.parseInt(et_friend_share4.getText().toString());
-            unEqualMap.put(numbers.get(0), amountFriend1);
-            unEqualMap.put(numbers.get(1), amountFriend2);
-            unEqualMap.put(numbers.get(2), amountFriend3);
-            unEqualMap.put(numbers.get(3), amountFriend4);
-            Log.i("numbers", unEqualMap + "unequal map");
-            sendUnEqually(false, amount, unEqualMap);
+            sendUnEqually(false, amount, unEqualMap,phone_number_user);
             Toast.makeText(this, "Data sent", Toast.LENGTH_LONG).show();
         }
         }catch(Exception e){Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();}
     }
-
-    public void sendEqually(Boolean splitEqually, Double amount,Map<String,String> paidFor) {
+    //Send equally
+    public void sendEqually(Boolean splitEqually, Double amount,Map<String,String> paidFor,String paidBy) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         // Enter the correct url for your api service site
         JSONObject j = new JSONObject();
@@ -340,7 +322,6 @@ public void clearAll(View v){
         String url = "https://paisa.free.beeceptor.com";
         try {
             double splitAmount = amount/(paidFor.size()+1);
-
             for(String s:paidFor.keySet()) {
                 JSONObject j1 = new JSONObject();
                 j1.put("number", s);
@@ -350,6 +331,7 @@ public void clearAll(View v){
             j.put("splitEqually",splitEqually);
             j.put("amount",amount);
             j.put("paidFor",array);
+            j.put("paidBy",paidBy);
 
         }catch (Exception e){};
         // parser.parse(j);
@@ -369,7 +351,7 @@ public void clearAll(View v){
     }
 
     //Send data unEqually
-    public void sendUnEqually(Boolean splitEqually, Double amount, Map<String,Integer> paidFor) {
+    public void sendUnEqually(Boolean splitEqually, Double amount, Map<String,Integer> paidFor,String paidBy) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         // Enter the correct url for your api service site
         JSONObject j = new JSONObject();
@@ -390,6 +372,7 @@ public void clearAll(View v){
             j.put("splitEqually",splitEqually);
             j.put("paidAmount",amount);
             j.put("paidFor",array);
+            j.put("paidBy",paidBy);
 
             //j.put("splitEqually",splitEqually);
            // j.put("amount",amount);
