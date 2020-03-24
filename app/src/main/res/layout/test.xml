@@ -14,11 +14,15 @@
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/unequal_list"/>
+        android:layout_toEndOf="@id/unequal_list"
+        android:importantForAutofill="no"
+        android:inputType="TODO" />
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/unequal_list"
         android:text="@string/save"
-        android:layout_below="@id/unequal_list"/>
+        android:textAlignment="center" />
 </RelativeLayout>
