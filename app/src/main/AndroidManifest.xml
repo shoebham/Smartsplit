@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".logo_page">
+        <activity android:name=".logo_page"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,7 +25,8 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity android:name=".LoginActivity" android:launchMode = "singleInstance"/>
+        <activity android:name=".LoginActivity" android:launchMode = "singleInstance"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".MainActivity"  android:launchMode = "singleInstance"/>
 
     </application>
