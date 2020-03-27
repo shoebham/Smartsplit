@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".FriendsFragment">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler_view"
         android:scrollbars="vertical"
