@@ -23,8 +23,10 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -88,8 +90,9 @@ public class AddExpense extends AppCompatActivity {
     Map<String,String> contact_details = new LinkedHashMap<>();
     Map<String,Integer> unEqualMap = new LinkedHashMap<>();
     ArrayList<String> numbers = new ArrayList<String>();
+    ArrayList<String> name_of_contacts = new ArrayList<>();
+    private Listview_Adapter adapter_contacts;
     int start = 0;
-    //unequal share Editext
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,13 +172,12 @@ public class AddExpense extends AppCompatActivity {
             // permissions this app might request
         }
     }
-    //opening contact
+    //opening contact selection screen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode ==1){
-
             if(resultCode == RESULT_OK){
                 Uri contactData = data.getData();
                 ContentResolver contentResolver = getContentResolver();
@@ -199,7 +201,7 @@ public class AddExpense extends AppCompatActivity {
         }
     }
 
-
+    //Contact Chips
     public void put_in_contacts(){
       //  clearAll.setVisibility(View.VISIBLE);
         final ChipGroup chipGroup = findViewById(R.id.chip_group);
@@ -230,74 +232,37 @@ public class AddExpense extends AppCompatActivity {
         }
 
     }
+
     public void openMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     private int getString(String add_expense) {
         return 0;
     }
-    public void makeVisible(View v){
+
+    //showing unequal fields
+    public void makeVisible(View v) {
         final Dialog dialog = new Dialog(AddExpense.this);
         dialog.setContentView(R.layout.test);
         dialog.setTitle("Title...");
-        ArrayAdapter<String> adpater_contacts = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_activated_1);
-        for(String s:contact_details.keySet()){adpater_contacts.add(contact_details.get(s));}
-        ListView listView = dialog.findViewById(R.id.unequal_list);
-        listView.setAdapter(adpater_contacts);
 
+        for (String s : contact_details.keySet()) {
+            name_of_contacts.add(contact_details.get(s));
+            Log.i("numbers",name_of_contacts+"");
+        }
+            adapter_contacts = new Listview_Adapter(this, name_of_contacts);
+            ListView listView = dialog.findViewById(R.id.unequal_list);
+            listView.setAdapter(adapter_contacts);
+            dialog.show();
 
-//        RelativeLayout relativeLayout = dialog.findViewById(R.id.relative_layout3);
-////        RelativeLayout.LayoutParams relativeLayoutParams =  new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT , RelativeLayout.LayoutParams.MATCH_PARENT);
-////        relativeLayout.setLayoutParams(relativeLayoutParams);
-//        for(int k = 1 ; k <= contact_details.size() ; ++k) {
-//            LinearLayout linearLayout = new LinearLayout(this);
-//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//            linearLayout.setId(k);
-//            if (k > 1) {
-//                params.addRule(RelativeLayout.BELOW, k - 1);
-//            }
-//            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-//            linearLayout.setLayoutParams(params);
-//            for (String s : contact_details.keySet()) {
-//                TextView t = new TextView(this);
-//                EditText et = new EditText(this);
-//                t.setText(contact_details.get(s));
-//                linearLayout.addView(t);
-//                linearLayout.addView(et);
-//            }
-//            relativeLayout.addView(linearLayout, params);
-//        }
-//        for(String s:contact_details.keySet()){
-//            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
-//                    RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        LinearLayout l = new LinearLayout(this);
-//        int i=0;
-//            i++;
-//            l.setId(i);
-//            if(i>1)
-//            {
-//                relativeParams.addRule(RelativeLayout.BELOW, i-1);
-//            }
-//            .setLayoutParams(params);
-//            TextView t = new TextView(this);
-//            EditText et = new EditText(this);
-//            t.setText(contact_details.get(s));
-//            l.addView(t);
-//            l.addView(et);
-//            l.setId(i);
-//            l.setOrientation(LinearLayout.HORIZONTAL);
-//            relativeParams.addRule(RelativeLayout.BELOW,l.getId());
-//            relativeLayout.addView(l,relativeParams);
-//
-//        }
-        dialog.show();
     }
+
     public void makeInVisible(View v){
 
     }
     //sending data to server
-
         public void send (View v){
         try{
         Double amount = Double.parseDouble(amountEditText.getText().toString());
@@ -395,3 +360,4 @@ public class AddExpense extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 }
+
