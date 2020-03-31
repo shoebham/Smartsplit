@@ -57,7 +57,9 @@ import org.json.JSONObject;
 
 import java.security.Key;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +91,7 @@ public class AddExpense extends AppCompatActivity {
     public  TextView friend_share1,friend_share2,friend_share3,friend_share4;
     Map<String,String> contact_details = new LinkedHashMap<>();
     Map<String,Integer> unEqualMap = new LinkedHashMap<>();
+    ArrayList<Integer> uneualvalues = new ArrayList<>();
     ArrayList<String> numbers = new ArrayList<String>();
     ArrayList<String> name_of_contacts = new ArrayList<>();
     private Listview_Adapter adapter_contacts;
@@ -244,21 +247,53 @@ public class AddExpense extends AppCompatActivity {
 
     //showing unequal fields
     public void makeVisible(View v) {
+        try {
         final Dialog dialog = new Dialog(AddExpense.this);
         dialog.setContentView(R.layout.test);
         dialog.setTitle("Title...");
 
+        Set<String> set = new HashSet<>();
         for (String s : contact_details.keySet()) {
             name_of_contacts.add(contact_details.get(s));
-            Log.i("numbers",name_of_contacts+"");
+            Log.i("numbers",name_of_contacts+" without set");
         }
+        for (String s : contact_details.keySet()) {
+            numbers.add(s);
+            Log.i("numbers",numbers+"");
+        }
+        set.addAll(name_of_contacts);
+        name_of_contacts.clear();
+        name_of_contacts.addAll(set);
+        Log.i("numbers",name_of_contacts+" with set");
             adapter_contacts = new Listview_Adapter(this, name_of_contacts);
-            ListView listView = dialog.findViewById(R.id.unequal_list);
+            final ListView listView = dialog.findViewById(R.id.unequal_list);
             listView.setAdapter(adapter_contacts);
-            dialog.show();
+            saveButton = dialog.findViewById(R.id.save);
 
+                final Double amount = Double.parseDouble(amountEditText.getText().toString());
+
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for (int i=0;i<name_of_contacts.size();i++){
+                        unEqualMap.put(numbers.get(i), (Integer) adapter_contacts.getItem(i));
+                    }
+                    try {
+                        sendUnEqually(false, amount, unEqualMap, phone_number_user);
+                        Toast.makeText(AddExpense.this, "Data sent", Toast.LENGTH_LONG).show();
+                    }catch (Exception e){ Toast.makeText(AddExpense.this, "Error", Toast.LENGTH_LONG).show();}
+                    Log.i("numbers", unEqualMap +"in addexpense");
+                }
+            });
+            dialog.show();
+            split2.setVisibility(View.GONE);
+            //uneualvalues.add(adapter_contacts.getUnqualValues());
+    }catch (Exception e){Toast.makeText(this,"Please enter some amount",Toast.LENGTH_LONG).show();}
     }
 
+    public void saveValues(){
+
+    }
     public void makeInVisible(View v){
 
     }
@@ -266,9 +301,7 @@ public class AddExpense extends AppCompatActivity {
         public void send (View v){
         try{
         Double amount = Double.parseDouble(amountEditText.getText().toString());
-        for (String s : contact_details.keySet()) {
-            numbers.add(s);
-        }
+
         if (equally.isChecked()) {
             sendEqually(true, amount, contact_details,phone_number_user);
             Toast.makeText(this, "Data sent", Toast.LENGTH_LONG).show();
