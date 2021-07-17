@@ -6,4 +6,8 @@
     <color name="colorPrimary">#1CC29F</color>
     <color name="colorPrimaryDark">#18A582</color>
     <color name="colorAccent">#FF652F</color>
+    <color name="logo_blue1">#AEDDFF</color>
+    <color name="logo_blue2">#7BC6FF</color>
+    <color name="logo_blue3">#1697F6</color>
+    <color name="logo_blue4">#1867C0</color>
 </resources>

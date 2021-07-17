@@ -2,6 +2,7 @@ package com.example.smartsplit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -23,19 +24,52 @@ import java.util.concurrent.TimeUnit;
 public class LoginActivity extends AppCompatActivity {
 
 
+
     private String verificationId;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private EditText editText;
+    private PhoneAuthCredential credential;
+    public String phone_number_user,phonenumber;
 
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
+            mCallBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         mAuth = FirebaseAuth.getInstance();
+        mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            @Override
+            public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                super.onCodeSent(s, forceResendingToken);
+                Log.i("numbers","I am in codeSent ");
+                verificationId = s;
+                PhoneAuthProvider.ForceResendingToken mResendToken = forceResendingToken;
+            }
+
+            @Override
+            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                String code = phoneAuthCredential.getSmsCode();
+                Log.i("numbers","I am in onVerificationCOmpleted ");
+                if (code != null) {
+                    editText.setText(code);
+                    verifyCode(code);
+                }
+            }
+
+            @Override
+            public void onVerificationFailed(FirebaseException e) {
+                Log.i("numbers","fail");
+                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        };
         progressBar = findViewById(R.id.progressbar);
         editText = findViewById(R.id.editTextCode);
-        String phonenumber = getIntent().getStringExtra("phonenumber");
+        Log.i("numbers","I am in onCreate ");
+        phonenumber= getIntent().getStringExtra("phonenumber");
         sendVerificationCode(phonenumber);
 
         findViewById(R.id.buttonSignIn).setOnClickListener(new View.OnClickListener() {
@@ -45,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 String code = editText.getText().toString().trim();
 
                 if (code.isEmpty() || code.length() < 6) {
+
                     editText.setError("Enter code...");
                     editText.requestFocus();
                     return;
@@ -55,8 +90,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
+    public void setPhone_number_user(String phone_number_user) {
+        this.phone_number_user = phone_number_user;
+       Log.i("numbers", getPhone_number_user());
+    }
+
+    public String getPhone_number_user() {
+       // Log.i("numbers",phone_number_user+" is");
+        return phone_number_user;
+    }
+
     private void verifyCode(String code) {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+        credential = PhoneAuthProvider.getCredential(verificationId, code);
         signInWithCredential(credential);
     }
 
@@ -66,16 +112,24 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            setPhone_number_user(phonenumber);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.putExtra("phone_number_user",phone_number_user);
+                         //   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                             startActivity(intent);
+                            Log.i("numbers","i am in login activity again");
+                            finish();
+
                         } else {
                             Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
+
     private void sendVerificationCode(String number) {
+        Log.i("numbers","I am in sendVerificationCOde ");
         progressBar.setVisibility(View.VISIBLE);
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 number,
@@ -86,29 +140,7 @@ public class LoginActivity extends AppCompatActivity {
         );
 
     }
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
-            mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-        @Override
-        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            verificationId = s;
-        }
-
-        @Override
-        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-            String code = phoneAuthCredential.getSmsCode();
-            if (code != null) {
-                editText.setText(code);
-                verifyCode(code);
-            }
-        }
-
-        @Override
-        public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    };
 }
 /*
 public class LoginActivity extends AppCompatActivity {

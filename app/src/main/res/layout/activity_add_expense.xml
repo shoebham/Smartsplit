@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/linear"
+    android:theme="@style/AppTheme.NoActionBar"
     tools:context=".AddExpense">
 
-     <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:elevation="4dp"
-                android:id="@+id/toolbaradd"
-                app:title="Add Expense"
-                android:clickable="true"
-                app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-         android:focusable="true">
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:clickable="true"
-            android:text="@string/save"
-            android:layout_alignParentEnd="true"
-            android:focusable="true" />
-      </androidx.appcompat.widget.Toolbar>
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbaradd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_on_primary_emphasis_high_type"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        app:title="Add Expense">
+        <!--        <Button-->
+        <!--            android:id="@+id/saveButton"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@color/colorPrimary"-->
+        <!--            android:clickable="true"-->
+        <!--            android:text="@string/save"-->
+        <!--            android:layout_alignParentEnd="true"-->
+        <!--            android:focusable="true" />-->
+    </com.google.android.material.appbar.MaterialToolbar>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbaradd"
+        android:padding="10dp"
         android:text="@string/with_you_and"
         android:textSize="22sp" />
 
@@ -40,225 +46,133 @@
         android:id="@+id/contactAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
         android:completionHint="@string/enter_a_contact"
         android:completionThreshold="0"
         android:ems="10"
-        android:hint="@string/enter_a_contact" />
-    <ImageButton
+        android:hint="@string/enter_a_contact"
+        android:padding="10dp" />
+
+    <ImageView
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_add"
-        android:contentDescription="@string/todo" />
+        android:layout_below="@id/contactAdd"
+        android:contentDescription="@string/todo"
+        android:foreground="?android:selectableItemBackground"
+        android:padding="10dp"
+        android:src="@drawable/baseline_add_circle_outline_white_18dp" />
     <!-- Hidden Contact Details-->
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/hidden1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
 
-    <TextView
-        android:id="@+id/hidden2"
-        android:layout_below="@id/hidden1"
+<RelativeLayout
+    android:id="@+id/relative_layout2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/imageButton">
+    <com.google.android.material.chip.ChipGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
-    <TextView
-        android:id="@+id/hidden3"
-        android:layout_below="@+id/hidden2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/hidden4"
-        android:layout_below="@id/hidden3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-    <ImageButton
-        android:id="@+id/clearall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/presence_offline"
-        android:onClick="clearAll"
-        android:layout_below="@+id/hidden4"
-        android:visibility="gone"
-        android:contentDescription="@string/todo" />
+        android:id="@+id/chip_group"/>
 </RelativeLayout>
     <!-- Hidden Contact Details-->
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/relative_layout4"
+        android:layout_below="@+id/relative_layout2"
         android:layout_height="wrap_content"
-        android:drawableStart="@android:drawable/ic_menu_sort_by_size"
-        android:ems="10"
-        android:hint="@string/enter_a_description"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName" />
+        android:layout_width="wrap_content">
 
-    <EditText
-        android:id="@+id/amount"
-        android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/desc"
+            android:ems="10"
+            android:hint="@string/enter_a_description"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:padding="10dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/dollar"
-        android:ems="10"
-        android:hint="@string/_0_00"
-        android:importantForAutofill="no"
-        android:inputType="number" />
+        android:id="@+id/relative_layout5"
+        android:layout_below="@+id/relative_layout4">
+
+        <ImageView
+            android:id="@+id/rupee"
+            android:layout_width="54dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            app:srcCompat="@drawable/rupee_white" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/rupee"
+            android:drawableTint="@color/common_google_signin_btn_text_dark_default"
+            android:ems="10"
+            android:hint="@string/_0_00"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:padding="10dp" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/relative_layout5"
+        android:padding="10dp"
+        android:paddingTop="10dp"
         android:text="@string/split"
         android:textSize="20sp" />
 
 
     <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/textView3"
+        android:layout_below="@id/relative_layout5"
+        android:padding="0dp"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/equally"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="makeInVisible"
+            android:paddingEnd="10dp"
+            android:padding="10dp"
             android:text="@string/equally"/>
-
         <RadioButton
             android:id="@+id/unequally"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/unequally"
-            android:onClick="makeVisible"/>
+            android:onClick="makeVisible"
+            android:padding="10dp"
+            android:text="@string/unequally" />
 
     </RadioGroup>
-<!--HIDDEN-->
-  <!--<TextView
-      android:id="@+id/your_share_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         android:visibility="gone"
-        android:text="Enter your share:"/>
-    <EditText
-        android:id="@+id/et_your_share"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:inputType="number"
-        android:layout_height="wrap_content"
-        />-->
-<!-- Unequal hidden fields-->
-    <RelativeLayout
-        android:id="@+id/relative_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-        <TextView
-            android:id="@+id/friend_share_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:textSize="24sp"
-            android:layout_above="@id/friend_share_text"
-            android:text="@string/enter_share_of"/>
-        <!-- Friend 1-->
-    <TextView
-        android:id="@+id/friend1_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/friend_share_text"
-        android:textSize="24sp"
-        android:text="@string/friend1"/>
 
-        <EditText
-            android:id="@+id/et_friend1_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/friend2_share"
-            android:layout_toEndOf="@+id/friend1_share"
-            android:inputType="number"
-            android:visibility="visible"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor" />
-
-        <!-- Friend 2-->
-    <TextView
-        android:id="@+id/friend2_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/friend1_share"
-        android:textSize="24sp"
-        android:text="@string/friend2"/>
-        <EditText
-            android:id="@+id/et_friend2_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/friend2_share"
-            android:layout_above="@+id/friend3_share"
-            android:inputType="number"
-
-            android:visibility="visible"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor" />
-
-        <!-- Friend 3-->
-    <TextView
-         android:id="@+id/friend3_share"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/friend2_share"
-         android:textSize="24sp"
-         android:text="@string/friend3"/>
-        <EditText
-            android:id="@+id/et_friend3_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/friend3_share"
-            android:layout_above="@+id/friend4_share"
-            android:inputType="number"
-            android:visibility="visible"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor" />
-
-        <!-- Friend 4-->
-    <TextView
-        android:id="@+id/friend4_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/friend3_share"
-        android:textSize="24sp"
-        android:text="@string/friend4"/>
-        <EditText
-            android:id="@+id/et_friend4_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/friend4_share"
-            android:layout_above="@+id/split"
-            android:inputType="number"
-            android:visibility="visible"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor" />
-        <!--HIDDEN-->
-        <Button
-            android:id="@+id/split"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/friend4_share"
-            android:text="@string/splitnosemi"
-            android:onClick="send"
-            />
-
-    </RelativeLayout>
-    <Button
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/split2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/splitbold"
+        android:layout_below="@id/textView3"
+        android:layout_margin="14dp"
+        android:layout_marginTop="14dp"
         android:onClick="send"
-        />
-</LinearLayout>
+        android:outlineProvider="background"
+        android:text="@string/splitbold"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        app:strokeColor="@color/cardview_light_background" />
+</RelativeLayout></ScrollView>

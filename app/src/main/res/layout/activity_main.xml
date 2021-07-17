@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:elevation="4dp"
-            android:id="@+id/toolbar"/>
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/design_default_color_on_secondary"-->
+<!--            android:elevation="4dp"-->
+<!--            android:id="@+id/toolbar"/>-->
 
 
         <com.google.android.material.tabs.TabLayout
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorColor="@color/common_google_signin_btn_text_dark_default"
             app:tabIndicatorHeight="2dp"
             app:tabMode="fixed" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -63,8 +63,8 @@
         app:menu_animationDelayPerItem="50"
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_buttonSpacing="0dp"
-        app:menu_colorNormal="#DA4336"
-        app:menu_colorPressed="#E75043"
+        app:menu_colorNormal="@color/logo_blue3"
+        app:menu_colorPressed="@color/logo_blue4"
         app:menu_colorRipple="#99FFFFFF"
         app:menu_fab_hide_animation="@anim/fab_scale_down"
         app:menu_fab_label="Close"
@@ -102,6 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/fab_add"
+            app:fab_colorNormal="@color/logo_blue4"
             app:fab_label="Expense"
             app:fab_size="mini" />
 

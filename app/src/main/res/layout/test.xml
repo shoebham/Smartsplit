@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/relative_layout3"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme.NoActionBar">
+
+
+
+    <ListView
+        android:id="@+id/unequal_list"
+        android:layout_width="match_parent"
+        android:smoothScrollbar="true"
+        android:scrollingCache="false"
+        android:animationCache="false"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/unequal_list"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:text="@string/splitbold"/>
+
+</RelativeLayout>

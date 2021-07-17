@@ -14,7 +14,6 @@
     <string name="logout">Logout</string>
     <string name="take_me_home">Take me Home</string>
     <string name="welcome_you_are_logged_in">Welcome! You are logged in</string>
-    <string name="todo">TODO</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="already_have_an_account_log_in_here">Already have an account? Log in here</string>
@@ -36,6 +35,8 @@
     <string name="enter_share_of">Enter share of:</string>
     <string name="splitnosemi">Split</string>
     <string name="splitbold">Split</string>
+    <string name="Rs">\u20B9</string>
+    <string name="todo">TODO</string>
     <string-array name="programming_languages">
         <item>C</item>
         <item>C++</item>
