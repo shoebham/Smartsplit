@@ -1,4 +1,6 @@
 # Smartsplit
+You can download the app(v1), and send data to the server.<br>
+You can view the data sent at https://beeceptor.com/console/paisa <br>
 This project is half completed. 
 Android side is done. Server side is still pending and will be completed when I am proficient in server side development.(soon)
 
